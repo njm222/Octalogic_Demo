@@ -28,7 +28,7 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Chat::create($request->all());
     }
 
     /**
@@ -40,7 +40,6 @@ class ChatController extends Controller
     public function show($id)
     {
         return Chat::where("users", (int)$id)->get();
-
     }
 
     /**
@@ -52,7 +51,13 @@ class ChatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $chat = Chat::findOrFail((int)$id);
+        $chat->push('messages', array(
+            "senderID" => $request->get('userID'),
+            "msg" => $request->get('newMessage')
+        ));
+        $chat->save();
+        return $chat;
     }
 
     /**
@@ -63,6 +68,7 @@ class ChatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Chat::findOrFail((int)$id);
+        return $user->delete();
     }
 }

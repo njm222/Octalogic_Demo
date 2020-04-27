@@ -21,9 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
 Route::post('users', 'UserController@store');
-Route::put('users', 'UserController@store');
+Route::post('users/{id}', 'UserController@update');
 Route::delete('users/{id}', 'UserController@destroy');
 
 Route::get('chats', 'ChatController@index');
 Route::get('chats/{id}', 'ChatController@show');
+Route::post('chats', 'ChatController@store');
+Route::post('chats/{id}', 'ChatController@update');
+Route::delete('chats/{id}', 'ChatController@destroy');
 
