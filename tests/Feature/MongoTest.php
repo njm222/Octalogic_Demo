@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Http\Controllers\MongoDB;
 
 class MongoTest extends TestCase
 {
@@ -13,10 +14,17 @@ class MongoTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
-    {
-        $response = $this->get('/');
+    public function testConnection() {
+        $response = $this->get('/testConnection');
 
-        $response->assertStatus(200);
+        $this->assertStringContainsString(env('DB_DATABASE'), $response->getContent());
     }
+
+    public function testAddSampleData() {
+        $response = $this->get('/setupData');
+
+        $this->assertStringContainsString('sample data has been added', $response->getContent());
+    }
+
+    public function
 }
