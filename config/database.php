@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -90,6 +90,17 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'host' => 'localhost',
+            'port' => '27017',
+            'database' => 'Octalogic-chat',
+            'username' => 'admin',
+            'password' => 'adminpswd',
+            'options' => [
+                'db' => env('DB_ADMIN_DATABASE', 'admin'),
+            ],
+        ]
 
     ],
 
@@ -150,17 +161,4 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-
-    'mongodb' => [
-        'driver' => 'mongodb',
-        'host' => env('DB_CONNECTION', 'localhost'),
-        'port' => env('DB_PORT', 27017),
-        'database' => env('DB_DATABASE'),
-        'username' => env('DB_USERNAME'),
-        'password' => env('DB_PASSWORD'),
-        'options' => [
-            'database' => env('DB_ADMIN_DATABASE', 'admin'),
-        ],
-    ]
-
 ];

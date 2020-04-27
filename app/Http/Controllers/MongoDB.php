@@ -25,7 +25,7 @@ class MongoDB extends Controller
         if ($this->db->users->countDocuments() === 0) {
             for ( $i = 0; $i < 10; $i++ )
             {
-                $this->db->users->insertOne(array("userID" => $i ));
+                $this->db->users->insertOne(array("_id" => $i, "userID" => $i ));
             }
         }
         $this->db->chats->drop();
@@ -33,10 +33,10 @@ class MongoDB extends Controller
         if ($this->db->chats->countDocuments() === 0) {
             for ( $i = 1; $i < 10; $i++ )
             {
-                $this->db->chats->insertOne(array("users" => array(0, $i),
+                $this->db->chats->insertOne(array("_id" => $i, "users" => array(0, $i),
                     "messages" => array(
-                        array("senderID" => 0, "msg" => "test msg from user1"),
-                        array("senderID" => $i, "msg" => "test msg from user$i")) ));
+                        array("senderID" => 0, "msg" => "test msg from user-0"),
+                        array("senderID" => $i, "msg" => "test msg from user-$i")) ));
             }
         }
 
