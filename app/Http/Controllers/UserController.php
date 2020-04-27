@@ -28,30 +28,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return User::create($request->all());
+        if (User::findOrFail((int)$request->get('userId'))) {
+            return "user already exists";
+        } else {
+            return User::create($request->all());
+        }
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return UserResource
      */
     public function show($id)
     {
-        return User::find((int)$id);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $user = User::findOrFail((int)$id);
+        return new UserResource($user);
     }
 
     /**
@@ -62,6 +55,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return User::destroy((int)$id);
+        $user = User::findOrFail((int)$id);
+        return $user->delete();
     }
 }
