@@ -33,4 +33,18 @@ class ChatsTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonCount(1);
     }
+
+    public function testSendMessage()
+    {
+        $response = $this->get('/api/chats/1');
+
+        $data = $response->assertStatus(200)->getContent();
+
+        $response = $this->post('/api/chats/1?newMessage=test&userID=1');
+
+        $newData = $response->assertStatus(200)->getContent();
+
+        $this->assertNotEquals($newData, $data);
+
+    }
 }
