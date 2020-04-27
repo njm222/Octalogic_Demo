@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Http\Controllers\MongoDB;
 
 class MongoTest extends TestCase
 {
@@ -25,6 +24,4 @@ class MongoTest extends TestCase
 
         $this->assertStringContainsString('sample data has been added', $response->getContent());
     }
-
-    public function
 }
