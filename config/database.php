@@ -92,13 +92,13 @@ return [
         ],
         'mongodb' => [
             'driver' => 'mongodb',
-            'host' => 'localhost',
+            'host' => '127.0.0.1',
             'port' => '27017',
             'database' => 'Octalogic-chat',
             'username' => 'admin',
             'password' => 'adminpswd',
             'options' => [
-                'db' => env('DB_ADMIN_DATABASE', 'admin'),
+                'db' => 'admin',
             ],
         ]
 
